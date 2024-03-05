@@ -1,0 +1,24 @@
+{% extends "app/base.html" %}
+
+{% load static %}
+{% block title %}Payment-status{% endblock title %}
+
+{% block main-content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body text-center">
+                    {% if status %}
+                        <h2 class="text-success">Thank you. Your payment was successful.</h2>
+                        <img src="{% static 'success_image.png' %}" alt="Success Image" class="img-fluid mt-3">
+                    {% else %}
+                        <h2 class="text-danger">Your Payment has failed! Please try again.</h2>
+                        <img src="{% static 'error_image.png' %}" alt="Error Image" class="img-fluid mt-3">
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main-content %}

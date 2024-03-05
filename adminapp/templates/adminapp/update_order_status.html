@@ -1,0 +1,26 @@
+{% extends 'app/base.html' %}
+{% block title %}Update Order Status{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col">
+            <h3>Update Order Status</h3>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="status">New Status:</label>
+                    <select id="status" name="status" class="form-control" required>
+                        <option value="" selected disabled>Select Status</option>
+                        <option value="Accepted">Accepted</option>
+                        <option value="Packed">Packed</option>
+                        <option value="On The Way">On The Way</option>
+                        <option value="Delivered">Delivered</option>
+                        <option value="Cancel">Cancel</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock main-content %}

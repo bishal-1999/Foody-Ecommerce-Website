@@ -1,0 +1,59 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Add Product{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+  <div class="col-sm-8 offset-sm-2">
+   <div class="card shadow p-5">
+     <h3 class="card-title text-center mb-4"><i class="fas fa-plus-circle"></i> Add Product</h3>
+     <hr>
+     {% if messages %}
+     <div class="alert alert-success" role="alert">
+         {% for message in messages %}
+             {{ message }}
+         {% endfor %}
+     </div>
+     {% endif %}
+     <form method="post" enctype="multipart/form-data">
+       {% csrf_token %}
+       <div class="form-group mb-3">
+         <label for="id_title">Title</label>
+         <input type="text" name="title" id="id_title" class="form-control" placeholder="Enter product title">
+       </div>
+       <div class="form-group mb-3">
+         <label for="id_selling_price">Selling Price</label>
+         <input type="number" name="selling_price" id="id_selling_price" class="form-control" placeholder="Enter selling price">
+       </div>
+       <div class="form-group mb-3">
+         <label for="id_discounted_price">Discounted Price</label>
+         <input type="number" name="discounted_price" id="id_discounted_price" class="form-control" placeholder="Enter discounted price">
+       </div>
+       <div class="form-group mb-3">
+         <label for="id_description">Description</label>
+         <textarea name="description" id="id_description" class="form-control" rows="4" placeholder="Enter product description"></textarea>
+       </div>
+       <div class="form-group mb-3">
+         <label for="id_brand">Brand</label>
+         <input type="text" name="brand" id="id_brand" class="form-control" placeholder="Enter product brand">
+       </div>
+       <div class="form-group mb-3">
+         <label for="id_category">Category</label>
+         <select name="category" id="id_category" class="form-control">
+           <option value="f">Fruits</option>
+           <option value="v">Vegetables</option>
+           <option value="b">Bakery</option>
+           <option value="d">Dairy</option>
+         </select>
+       </div>
+       <div class="form-group mb-3">
+         <label for="id_product_image">Product Image</label>
+         <input type="file" name="product_image" id="id_product_image" class="form-control">
+       </div>
+       <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Submit</button>
+     </form>
+   </div>
+  </div>
+ </div>
+</div>
+{% endblock main-content %}

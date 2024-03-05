@@ -1,0 +1,86 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Bakery{% endblock title %}
+{% block main-content %}
+<style>
+    .item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out;
+    }
+    
+    .item img {
+        height: 320px; /* Adjusted height */
+        width: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .item:hover img {
+        transform: scale(1.1);
+    }
+
+    .details {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 10px;
+        text-align: center;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .item:hover .details {
+        background-color: rgba(255, 255, 255, 0.6);
+    }
+
+    .details a {
+        color: #333; /* Changed color to black */
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s ease-in-out;
+    }
+
+    .details a.view-details {
+        color: #28a745; /* Changed color to green */
+    }
+
+    .details a.view-details:hover {
+        color: #218838; /* Darker green on hover */
+    }
+</style>
+
+<div class="container my-5">
+ <div class="row">
+  <div class="col-sm-3">
+   <div class="list-group">
+    <a href="{% url 'fruits' %}" class="list-group-item list-group-item-action" >Fruits</a>
+    <a href="{% url 'vegetables'  %}" class="list-group-item list-group-item-action">Vegetables</a>
+    <a href="{% url 'bakery'  %}" class="list-group-item list-group-item-action active">Bakery</a>
+    <a href="{% url 'dairy'  %}" class="list-group-item list-group-item-action">Dairy</a>
+   </div>
+  </div>
+  <div class="col-sm-8">
+   <div class="row">
+    {% for product in bakery %}
+     <div class="col-sm-4 text-center mb-4">
+      <div class="item">
+        <a href="{% url 'product-detail' product.id %}">
+          <img src="{{product.product_image.url}}" alt="" class="img-fluid">
+          <div class="details">
+              <div class="fw-bold">{{product.title}}</div>
+              <div class="fw-bold">Rs. {{product.discounted_price}} <small class="fw-light text-decoration-line-through">{{product.selling_price}}</small></div>
+              <a href="{% url 'product-detail' product.id %}" class="view-details">View Details</a> <!-- View Details with green color -->
+          </div>
+        </a>
+       </div>
+     </div>
+    {% endfor %}
+   </div>
+  </div>
+ </div>
+</div>
+{% endblock main-content %}
